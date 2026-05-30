@@ -1,0 +1,33 @@
+{
+  "name": "pi-session-resume-hint",
+  "version": "0.1.0",
+  "description": "Print a compact Pi session resume command when an interactive Pi session exits.",
+  "type": "module",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patlux/pi-session-resume-hint.git"
+  },
+  "homepage": "https://github.com/patlux/pi-session-resume-hint#readme",
+  "bugs": {
+    "url": "https://github.com/patlux/pi-session-resume-hint/issues"
+  },
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
