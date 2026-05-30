@@ -56,7 +56,7 @@ It does not print during reloads, forks, session switches, or ephemeral sessions
 
 ```sh
 npm ci
-npm run ci
+npm run check
 ```
 
 The package uses TypeScript source directly. Pi loads `.ts` extensions without a build step.
