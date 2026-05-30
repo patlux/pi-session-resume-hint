@@ -1,6 +1,6 @@
 {
   "name": "pi-session-resume-hint",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Print a compact Pi session resume command when an interactive Pi session exits.",
   "type": "module",
   "exports": {

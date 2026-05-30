@@ -2,7 +2,7 @@
 
 A [pi](https://pi.dev) extension that prints a compact resume command when you quit a persistent Pi session.
 
-When Pi exits normally, the extension shows the session id and a shell-safe `pi --session <file>` command so you can resume the exact conversation later.
+When Pi exits normally, the extension shows a short `pi --session <id>` command so you can resume the exact conversation later without copying a long wrapped file path.
 
 ## Install
 
@@ -26,15 +26,8 @@ Quit Pi from a persistent session. The extension prints a small hint:
 
 ```txt
 ╭─ pi session ─────────────────────────────────────────╮
-│ id     01jz...
-│ resume pi --session /path/to/session.jsonl
+│ resume pi --session 01jz...
 ╰──────────────────────────────────────────────────────╯
-```
-
-If the session path contains spaces or shell-sensitive characters, the resume command is quoted safely:
-
-```txt
-pi --session '/tmp/my session.jsonl'
 ```
 
 ## Behavior
@@ -43,6 +36,7 @@ The hint appears only when:
 
 - Pi emits `session_shutdown` with reason `quit`
 - the current session has a backing session file
+- Pi can resolve the session id via its normal `--session <path|id>` support
 
 It does not print during reloads, forks, session switches, or ephemeral sessions.
 
