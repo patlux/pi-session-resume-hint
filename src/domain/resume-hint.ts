@@ -2,6 +2,13 @@ export interface SessionResumeInfo {
   sessionId: string;
 }
 
+export interface SessionEntryLike {
+  type: string;
+  message?: {
+    role?: string;
+  };
+}
+
 export interface AnsiPalette {
   muted: string;
   reset: string;
@@ -16,13 +23,16 @@ export function createResumeCommand(sessionId: string): string {
   return `pi --session ${sessionId}`;
 }
 
+export function hasResumableConversation(entries: readonly SessionEntryLike[]): boolean {
+  return entries.some(
+    (entry) =>
+      entry.type === "message" &&
+      (entry.message?.role === "user" || entry.message?.role === "assistant"),
+  );
+}
+
 export function formatResumeHint(info: SessionResumeInfo, palette: AnsiPalette = defaultAnsiPalette): string {
   const resumeCommand = createResumeCommand(info.sessionId);
-  const lines = [
-    "╭─ pi session ─────────────────────────────────────────╮",
-    `│ resume ${resumeCommand}`,
-    "╰──────────────────────────────────────────────────────╯",
-  ];
 
-  return `\n${lines.map((line) => `${palette.muted}${line}${palette.reset}`).join("\n")}\n`;
+  return `\n${palette.muted}${resumeCommand}${palette.reset}\n`;
 }

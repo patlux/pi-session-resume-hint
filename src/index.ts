@@ -1,10 +1,11 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import { formatResumeHint } from "./domain/resume-hint.ts";
+import { formatResumeHint, hasResumableConversation } from "./domain/resume-hint.ts";
 
 export default function sessionResumeHint(pi: ExtensionAPI) {
   pi.on("session_shutdown", (event, ctx) => {
     if (event.reason !== "quit") return;
     if (!ctx.sessionManager.getSessionFile()) return;
+    if (!hasResumableConversation(ctx.sessionManager.getEntries())) return;
 
     process.stdout.write(
       formatResumeHint({

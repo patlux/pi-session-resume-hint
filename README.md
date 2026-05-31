@@ -2,14 +2,14 @@
 
 A [pi](https://pi.dev) extension that prints a compact resume command when you quit a persistent Pi session.
 
-When Pi exits normally, the extension shows a short `pi --session <id>` command so you can resume the exact conversation later without copying a long wrapped file path.
+When Pi exits normally, the extension prints a muted, copy-paste-ready `pi --session <id>` command so you can resume the exact conversation later without copying a long wrapped file path.
 
 ## Install
 
 This package is published on GitHub only.
 
 ```sh
-pi install git:github.com/patlux/pi-session-resume-hint@v0.1.1
+pi install git:github.com/patlux/pi-session-resume-hint@v0.1.4
 ```
 
 Then reload pi:
@@ -22,12 +22,10 @@ Then reload pi:
 
 No commands or configuration are required.
 
-Quit Pi from a persistent session. The extension prints a small hint:
+Quit Pi from a persistent session. The extension prints a single muted command:
 
 ```txt
-╭─ pi session ─────────────────────────────────────────╮
-│ resume pi --session 01jz...
-╰──────────────────────────────────────────────────────╯
+pi --session 01jz...
 ```
 
 ## Behavior
@@ -36,9 +34,10 @@ The hint appears only when:
 
 - Pi emits `session_shutdown` with reason `quit`
 - the current session has a backing session file
+- the current session contains at least one user or assistant message
 - Pi can resolve the session id via its normal `--session <path|id>` support
 
-It does not print during reloads, forks, session switches, or ephemeral sessions.
+It does not print during reloads, forks, session switches, ephemeral sessions, or empty sessions.
 
 ## Notes
 
